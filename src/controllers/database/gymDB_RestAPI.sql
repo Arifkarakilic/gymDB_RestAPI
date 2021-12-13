@@ -792,7 +792,7 @@ INSERT INTO public.employees (emp_id, name, surname, salary) VALUES (6, 'samet6'
 --
 
 INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (1, 'samet', 'karakurt', '2004-10-19 10:23:54', '2004-10-19 10:24:54');
-INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (2, 'ariffff', 'karakkırt', '2021-01-01 00:00:00', '2021-01-01 00:00:00');
+INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (2, 'ariffff', 'karakkirt', '2021-01-01 00:00:00', '2021-01-01 00:00:00');
 
 
 --
@@ -801,8 +801,8 @@ INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES 
 -- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (10, 'ariffff', 'karakkırt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
-INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (9, 'ariffff', 'karakkırt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
+INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (10, 'ariffff', 'karakkirt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
+INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (9, 'ariffff', 'karakkirt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
 
 
 --
