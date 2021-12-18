@@ -5,7 +5,7 @@
 -- Dumped from database version 13.4
 -- Dumped by pg_dump version 13.3
 
--- Started on 2021-12-13 10:50:53 UTC
+-- Started on 2021-12-18 09:13:38 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -384,7 +384,6 @@ CREATE TABLE public.product_series (
     quantity integer NOT NULL,
     price money NOT NULL,
     "lastUseDate" timestamp without time zone NOT NULL,
-    barcode integer NOT NULL,
     seller integer NOT NULL
 );
 
@@ -426,7 +425,8 @@ CREATE TABLE public.products (
     weight integer NOT NULL,
     price money NOT NULL,
     name character varying(40) NOT NULL,
-    last_use_date timestamp without time zone NOT NULL
+    last_use_date timestamp without time zone NOT NULL,
+    series_id integer
 );
 
 
@@ -792,7 +792,7 @@ INSERT INTO public.employees (emp_id, name, surname, salary) VALUES (6, 'samet6'
 --
 
 INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (1, 'samet', 'karakurt', '2004-10-19 10:23:54', '2004-10-19 10:24:54');
-INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (2, 'ariffff', 'karakkirt', '2021-01-01 00:00:00', '2021-01-01 00:00:00');
+INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES (2, 'ariffff', 'karakkırt', '2021-01-01 00:00:00', '2021-01-01 00:00:00');
 
 
 --
@@ -801,8 +801,8 @@ INSERT INTO public.guest_member (guest_id, name, surname, login, logout) VALUES 
 -- Data for Name: members; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (10, 'ariffff', 'karakkirt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
-INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (9, 'ariffff', 'karakkirt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
+INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (10, 'ariffff', 'karakkırt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
+INSERT INTO public.members (member_id, name, surname, height, weight, sex, tel, adress, membership_id) VALUES (9, 'ariffff', 'karakkırt', 85, 193, 'male', '5055555555', 'asdasdasdasdasd', 1);
 
 
 --
@@ -859,10 +859,10 @@ INSERT INTO public.packets (packet_id, name) VALUES (4, 'pool');
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.products (barcode, weight, price, name, last_use_date) VALUES (1, 800, '$80.00', 'protein powder', '2022-10-12 21:22:23');
-INSERT INTO public.products (barcode, weight, price, name, last_use_date) VALUES (2, 300, '$30.00', 'creatin', '2022-10-12 21:22:23');
-INSERT INTO public.products (barcode, weight, price, name, last_use_date) VALUES (3, 200, '$15.00', 'L-carnitine', '2022-10-12 21:22:23');
-INSERT INTO public.products (barcode, weight, price, name, last_use_date) VALUES (4, 50, '$5.00', 'BCAA', '2022-10-12 21:22:23');
+INSERT INTO public.products (barcode, weight, price, name, last_use_date, series_id) VALUES (1, 800, '$80.00', 'protein powder', '2022-10-12 21:22:23', NULL);
+INSERT INTO public.products (barcode, weight, price, name, last_use_date, series_id) VALUES (2, 300, '$30.00', 'creatin', '2022-10-12 21:22:23', NULL);
+INSERT INTO public.products (barcode, weight, price, name, last_use_date, series_id) VALUES (3, 200, '$15.00', 'L-carnitine', '2022-10-12 21:22:23', NULL);
+INSERT INTO public.products (barcode, weight, price, name, last_use_date, series_id) VALUES (4, 50, '$5.00', 'BCAA', '2022-10-12 21:22:23', NULL);
 
 
 --
@@ -929,6 +929,8 @@ INSERT INTO public.totals_salary (total) VALUES ('$300.00');
 -- Data for Name: trainers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public.trainers (emp_id, name, surname, salary) VALUES (1, 'samet
+', 'samet', '$50.00');
 
 
 --
@@ -1301,16 +1303,7 @@ ALTER TABLE ONLY public.membership_sport_category
 
 
 --
--- TOC entry 3624 (class 2606 OID 19940)
--- Name: product_series product_series_barcode_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.product_series
-    ADD CONSTRAINT product_series_barcode_fkey FOREIGN KEY (barcode) REFERENCES public.products(barcode) NOT VALID;
-
-
---
--- TOC entry 3625 (class 2606 OID 19945)
+-- TOC entry 3624 (class 2606 OID 19945)
 -- Name: product_series product_series_seller_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1334,6 +1327,15 @@ ALTER TABLE ONLY public.sales
 
 ALTER TABLE ONLY public.sales
     ADD CONSTRAINT sales_member_id_fkey FOREIGN KEY (member_id) REFERENCES public.members(member_id) NOT VALID;
+
+
+--
+-- TOC entry 3625 (class 2606 OID 22567)
+-- Name: products series_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT series_id FOREIGN KEY (series_id) REFERENCES public.product_series(series_id) NOT VALID;
 
 
 --
@@ -1372,7 +1374,7 @@ ALTER TABLE ONLY public.trainers_sport_category
     ADD CONSTRAINT trainers_sport_category_sport_id_fkey1 FOREIGN KEY (emp_id) REFERENCES public.trainers(emp_id) NOT VALID;
 
 
--- Completed on 2021-12-13 10:50:53 UTC
+-- Completed on 2021-12-18 09:13:38 UTC
 
 --
 -- PostgreSQL database dump complete
