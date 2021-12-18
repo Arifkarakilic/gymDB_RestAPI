@@ -80,7 +80,7 @@ ALTER PROCEDURE public.create_product(integer, money, character varying, timesta
 -- Name: create_product(character varying, integer, money, timestamp without time zone, integer, integer); Type: PROCEDURE; Schema: public; Owner: postgres
 --
 
-CREATE PROCEDURE public.create_product(character varying, integer, money, timestamp without time zone, integer, integer)
+CREATE PROCEDURE public.create_product_series(character varying, integer, money, timestamp without time zone, integer, integer)
     LANGUAGE plpgsql
     AS $_$
 
@@ -92,7 +92,7 @@ END;
 $_$;
 
 
-ALTER PROCEDURE public.create_product(character varying, integer, money, timestamp without time zone, integer, integer) OWNER TO postgres;
+ALTER PROCEDURE public.create_product_series(character varying, integer, money, timestamp without time zone, integer, integer) OWNER TO postgres;
 
 --
 -- TOC entry 230 (class 1255 OID 22120)

@@ -4,6 +4,10 @@ const getEmployees = async (req, res) => {
     const response = await pool.query('select * from employees');
     res.status(200).json(response.rows);
   };
+  const getSalary = async (req, res) => {
+    const response = await pool.query('select * from totals_salary');
+    res.status(200).json(response.rows);
+  };
   const getServants = async (req, res) => {
     const response = await pool.query('select * from servants');
     res.status(200).json(response.rows);
@@ -147,6 +151,7 @@ const deleteEmployees = async (req, res) => {
 
   module.exports ={
       getEmployees,
+      getSalary,
       getServants,
       getTrainers,
       getTrainersbyId,
